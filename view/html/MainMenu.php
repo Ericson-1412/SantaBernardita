@@ -14,13 +14,18 @@
                 ?>
                     <li><a class="nav-link" href="../UsuCurso/"><i class="fas fa-book"></i> 
                     <span>Mis Cursos</span></a></li>
+                    <li><a class="nav-link" href="../AdminMntAdolescente/"><i class="fas fa-user-graduate"></i> 
+                    <span>Mnt. Adolescentes</span></a></li>
                 <?php
             }else{
                 ?>
                     <li><a class="nav-link" href="../AdminMntUsuario/"><i class="fas fa-book"></i> 
                     <span>Mnt. Usuario</span></a></li>
+                    
                 <?php
             }
+            
+            
         ?>
             <li><a class="nav-link" a href="../UsuPerfil/" ><i class="far fa-user"></i> 
             <span>Perfil</span></a></li>
