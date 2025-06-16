@@ -156,9 +156,15 @@
             $sub_array[] = $row["usu_correo"];
             $sub_array[] = $row["usu_telf"];
             if ($row["rol_id"]==1) {
-                $sub_array[] = "Usuario";
+                $sub_array[] = "Administrador General";
+            }
+            else if ($row["rol_id"]==2) {
+                $sub_array[] = "Administrador";
+            }
+            else if ($row["rol_id"]==3) {
+                $sub_array[] = "Profesor";
             }else{
-                $sub_array[] = "Admin";
+                $sub_array[] = null;
             }
                 $sub_array[] = '<button type="button" onClick="editar('.$row["usu_id"].');" id="'.$row["usu_id"].'" class="btn btn-outline-warning btn-icon"><i class="fa fa-edit"></i></button>';
                 $sub_array[] = '<button type="button" onClick="eliminar('.$row["usu_id"].');" id="'.$row["usu_id"].'" class="btn btn-outline-danger btn-icon"><i class="fa fa-times"></i></button>';

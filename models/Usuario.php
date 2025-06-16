@@ -34,8 +34,16 @@
                         if ($resultado["rol_id"] == 1) {
                         header("Location:".Conectar::ruta()."view/UsuHome/");
                         exit();
+                        }
+                        else if ($resultado["rol_id"] == 2) {
+                        header("Location:".Conectar::ruta()."view/AdminMntAdolescente/");
+                        exit();
+                        }
+                        else if ($resultado["rol_id"] == 3) {
+                        header("Location:".Conectar::ruta()."view/AdminMntAsistencia/");
+                        exit();
                         } else {
-                            // Redirigir al home si no es estudiante
+                            // Redirigir al home si no es administrador general
                             header("Location:".Conectar::ruta()."view/UsuHome/");
                         }
                         exit();
