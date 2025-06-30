@@ -74,8 +74,9 @@
                                 </label>
                                 <select class="form-control" name="rol_id" id="rol_id" data-placeholder="Seleccione" required>
                                     <option value="" disabled selected>Seleccione</option>
-                                    <option value="1">Usuario</option>
-                                    <option value="2">Admin</option>
+                                    <option value="1">Administrador General</option>
+                                    <option value="2">Administrador</option>
+                                    <option value="3">Profesor</option>
                                 </select>
                             </div>
                         </div>        

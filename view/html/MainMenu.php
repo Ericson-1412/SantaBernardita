@@ -7,20 +7,31 @@
     </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Menu Principal</li>
-            <li><a class="nav-link" href="../UsuHome/"><i class="fas fa-home"></i>
-            <span>Inicio</span></a></li> 
         <?php
             if($_SESSION["rol_id"]==1){
                 ?>
-                    <li><a class="nav-link" href="../UsuCurso/"><i class="fas fa-book"></i> 
-                    <span>Mis Cursos</span></a></li>
-                <?php
-            }else{
-                ?>
+                    <li><a class="nav-link" href="../UsuHome/"><i class="fas fa-home"></i>
+                    <span>Inicio</span></a></li>
                     <li><a class="nav-link" href="../AdminMntUsuario/"><i class="fas fa-book"></i> 
                     <span>Mnt. Usuario</span></a></li>
+                    <li><a class="nav-link" href="../AdminMntAdolescente/"><i class="fas fa-user-graduate"></i> 
+                    <span>Mnt. Adolescentes</span></a></li>
+                <?php
+            }else if($_SESSION["rol_id"]==2){
+                ?>
+                    <li><a class="nav-link" href="../AdminMntAdolescente/"><i class="fas fa-user-graduate"></i> 
+                    <span>Mnt. Adolescentes</span></a></li>
+                    
+                <?php
+            }else if($_SESSION["rol_id"]==3){
+                ?>
+                    <li><a class="nav-link" href="../AdminMntAsistencia/"><i class="fas fa-book"></i> 
+                    <span>Mis Cursos</span></a></li>
+                    
                 <?php
             }
+            
+            
         ?>
             <li><a class="nav-link" a href="../UsuPerfil/" ><i class="far fa-user"></i> 
             <span>Perfil</span></a></li>
