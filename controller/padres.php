@@ -1,65 +1,63 @@
 <?php
 require_once("../config/conexion.php");
 
+class Padre extends Conectar {
 
-class Adolescente extends Conectar {
-
-    public function get_adolescentes() {
+    public function get_padres() {
         $conectar = parent::Conexion();
-        $sql = "SELECT * FROM adolescentes";
+        $sql = "SELECT * FROM padres"; 
         $stmt = $conectar->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function insert_adolescente($nombres, $apellidos, $edad, $dni, $sexo, $direccion) {
+    public function insert_padre($nombres, $apellidos, $dni, $telefono, $direccion, $ocupacion) {
         $conectar = parent::Conexion();
-        $sql = "INSERT INTO adolescentes (nombres, apellidos, edad, dni, sexo, direccion) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO padres (nombres, apellidos, dni, telefono, direccion, ocupacion) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conectar->prepare($sql);
-        return $stmt->execute([$nombres, $apellidos, $edad, $dni, $sexo, $direccion]);
+        return $stmt->execute([$nombres, $apellidos, $dni, $telefono, $direccion, $ocupacion]);
     }
 
-    public function get_adolescente_x_id($id) {
+    public function get_padre_x_id($id) {
         $conectar = parent::Conexion();
-        $sql = "SELECT * FROM adolescentes WHERE id = ?";
+        $sql = "SELECT * FROM padres WHERE id = ?";
         $stmt = $conectar->prepare($sql);
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update_adolescente($id, $nombres, $apellidos, $edad, $dni, $sexo, $direccion) {
+    public function update_padre($id, $nombres, $apellidos, $dni, $telefono, $direccion, $ocupacion) {
         $conectar = parent::Conexion();
-        $sql = "UPDATE adolescentes SET nombres = ?, apellidos = ?, edad = ?, dni = ?, sexo = ?, direccion = ? WHERE id = ?";
+        $sql = "UPDATE padres SET nombres = ?, apellidos = ?, dni = ?, telefono = ?, direccion = ?, ocupacion = ? WHERE id = ?";
         $stmt = $conectar->prepare($sql);
-        return $stmt->execute([$nombres, $apellidos, $edad, $dni, $sexo, $direccion, $id]);
+        return $stmt->execute([$nombres, $apellidos, $dni, $telefono, $direccion, $ocupacion, $id]);
     }
 
-    public function delete_adolescente($id) {
+    public function delete_padre($id) {
         $conectar = parent::Conexion();
-        $sql = "DELETE FROM adolescentes WHERE id = ?";
+        $sql = "DELETE FROM padres WHERE id = ?";
         $stmt = $conectar->prepare($sql);
         return $stmt->execute([$id]);
     }
 }
 
-
-$adolescente = new Adolescente();
+$padre = new Padre();
 
 if (isset($_GET["op"])) {
     switch ($_GET["op"]) {
 
         case "listar":
-            $datos = $adolescente->get_adolescentes();
+            $datos = $padre->get_padres();
             $data = array();
 
             foreach ($datos as $row) {
                 $sub_array = array();
                 $sub_array[] = $row["nombres"];
                 $sub_array[] = $row["apellidos"];
-                $sub_array[] = $row["edad"];
                 $sub_array[] = $row["dni"];
-                $sub_array[] = $row["sexo"];
+                $sub_array[] = $row["telefono"];
                 $sub_array[] = $row["direccion"];
+                $sub_array[] = $row["ocupacion"];
                 $sub_array[] = '<button type="button" onClick="editar(' . $row["id"] . ');" class="btn btn-warning btn-sm">Editar</button>';
                 $sub_array[] = '<button type="button" onClick="eliminar(' . $row["id"] . ');" class="btn btn-danger btn-sm">Eliminar</button>';
                 $data[] = $sub_array;
@@ -74,41 +72,42 @@ if (isset($_GET["op"])) {
             break;
 
         case "mostrar":
-            $datos = $adolescente->get_adolescente_x_id($_POST["id"]);
+            $datos = $padre->get_padre_x_id($_POST["id"]);
             echo json_encode($datos);
             break;
 
         case "guardaryeditar":
             if (empty($_POST["id"])) {
-                $adolescente->insert_adolescente(
+                $padre->insert_padre(
                     $_POST["nombres"],
                     $_POST["apellidos"],
-                    $_POST["edad"],
                     $_POST["dni"],
-                    $_POST["sexo"],
-                    $_POST["direccion"]
+                    $_POST["telefono"],
+                    $_POST["direccion"],
+                    $_POST["ocupacion"]
                 );
             } else {
-                $adolescente->update_adolescente(
+                $padre->update_padre(
                     $_POST["id"],
                     $_POST["nombres"],
                     $_POST["apellidos"],
-                    $_POST["edad"],
                     $_POST["dni"],
-                    $_POST["sexo"],
-                    $_POST["direccion"]
+                    $_POST["telefono"],
+                    $_POST["direccion"],
+                    $_POST["ocupacion"]
                 );
             }
             break;
-        case "combo":
-                $datos = $adolescente->get_adolescentes();
+            case "combo":
+                $datos = $padre->get_padres(); 
                 foreach ($datos as $row) {
-                  echo '<option value="'.$row["id"].'">'.$row["nombres"].' '.$row['apellidos'].'</option>';
+                    echo '<option value="'.$row["id"].'">'.$row["nombres"].' '.$row["apellidos"].'</option>';
                 }
                 break;
+            
 
         case "eliminar":
-            $adolescente->delete_adolescente($_POST["id"]);
+            $padre->delete_padre($_POST["id"]);
             break;
     }
 }

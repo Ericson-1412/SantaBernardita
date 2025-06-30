@@ -62,16 +62,16 @@ function editar(id) {
 function eliminar(id) {
   Swal.fire({
     title: 'Eliminar',
-    text: "Desea eliminar el registro?",
+    text: "¿Desea eliminar el registro?",
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonText: 'Si',
+    confirmButtonText: 'Sí',
     cancelButtonText: 'No'
   }).then((result) => {
     if (result.isConfirmed) {
       $.post("../../controller/padres.php?op=eliminar", { id: id }, function () {
         $('#padre_data').DataTable().ajax.reload();
-        Swal.fire('Eliminado', 'Registro eliminado', 'success');
+        Swal.fire('Eliminado', 'Registro eliminado correctamente', 'success');
       });
     }
   });

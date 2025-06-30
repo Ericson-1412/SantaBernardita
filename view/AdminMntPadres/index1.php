@@ -57,9 +57,9 @@ if (isset($_SESSION["usu_id"])) {
     </div>
   </div>
 
-  <?php require_once("modalmantenimiento.php"); ?>
+  <?php require_once("modalmanto.php"); ?>
   <?php require_once("../html/MainJs.php"); ?>
-  <script src="padre.js"></script> <!-- Asegúrate de tener este JS creado -->
+  <script src="adminpadre.js"></script> <!-- Asegúrate de tener este JS creado -->
 </body>
 </html>
 <?php
